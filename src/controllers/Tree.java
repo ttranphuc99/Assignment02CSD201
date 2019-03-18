@@ -34,7 +34,8 @@ public class Tree {
         }
         return true;
     }
-/*
+
+    /*
     public boolean insert(Node node) {
         boolean check = true;
         if (isEmpty()) {
@@ -61,23 +62,33 @@ public class Tree {
         }
         return check;
     }
-*/  
+     */
     public Node search(Node node, String word) {
         Node result = null;
         boolean found = false;
+
         while (node != null && !found) {
-            if (node.compareTo(word) < 0) {
-                node = node.getNodeLeft();
-            } else if (node.compareTo(word) > 0) {
-                node = node.getNodeRight();
-            } else {
+//            System.out.println("node to find:" + node.getWord());
+//            System.out.println("cmp : " + node.compareTo(word));
+            if (node.getWord().equals(word)) {
                 result = node;
                 found = true;
+            } else {
+                if (node.compareTo(word) > 0) {
+                    node = node.getNodeLeft();
+                } else if (node.compareTo(word) < 0) {
+                    node = node.getNodeRight();
+                }
             }
+//            if (result != null) {
+//                System.out.println("node: " + result.getWord());
+//            } else {
+//                System.out.println("null");
+//            }
         }
         return result;
     }
-    
+
     public Node leftRotate(Node node) {
         Node tNode1 = node.getNodeRight();
         Node tNode2 = tNode1.getNodeLeft();
@@ -85,13 +96,13 @@ public class Tree {
         //perform rotate
         tNode1.setNodeLeft(node);
         node.setNodeRight(tNode2);
-        
+
         //update height
         node.height = max(getHeight(node.getNodeLeft()), getHeight(node.getNodeRight())) + 1;
         tNode1.height = max(getHeight(tNode1.getNodeLeft()), getHeight(tNode1.getNodeRight())) + 1;
         return tNode1;
     }
-    
+
     public Node rightRotate(Node node) {
         Node tNode1 = node.getNodeLeft();
         Node tNode2 = tNode1.getNodeRight();
@@ -99,22 +110,21 @@ public class Tree {
         //perform rotate
         tNode1.setNodeRight(node);
         node.setNodeLeft(tNode2);
-        
+
         //update height
         node.height = max(getHeight(node.getNodeLeft()), getHeight(node.getNodeRight())) + 1;
         tNode1.height = max(getHeight(tNode1.getNodeLeft()), getHeight(tNode1.getNodeRight())) + 1;
-        
-        
+
         return tNode1;
     }
-    
+
     public static int getHeight(Node node) {
         if (node == null) {
             return 0;
         }
         return node.height;
     }
-    
+
     public static int getBalance(Node node) {
         if (node == null) {
             return 0;
@@ -122,14 +132,16 @@ public class Tree {
 
         return getHeight(node.getNodeRight()) - getHeight(node.getNodeLeft());
     }
-    
+
     private int max(int a, int b) {
         return (a > b) ? a : b;
     }
-    
+
     public Node insert(Node parentNode, Node addNode) {
-        if (parentNode == null) return addNode;
-        
+        if (parentNode == null) {
+            return addNode;
+        }
+
         if (addNode.compareTo(parentNode.getWord()) < 0) {
             parentNode.setNodeLeft(insert(parentNode.getNodeLeft(), addNode));
         } else if (addNode.compareTo(parentNode.getWord()) > 0) {
@@ -137,12 +149,12 @@ public class Tree {
         } else {
             return parentNode;
         }
-        
+
         parentNode.height = 1 + max(getHeight(parentNode.getNodeLeft()), getHeight(parentNode.getNodeRight()));
 
         int balance = getBalance(parentNode);
 
-        if (balance > 1 && parentNode.compareTo(addNode.getWord()) < 0 ) {
+        if (balance > 1 && parentNode.compareTo(addNode.getWord()) < 0) {
             //right right case
             return leftRotate(parentNode);
         } else if (balance > 1 && parentNode.compareTo(addNode.getWord()) > 0) {
@@ -159,7 +171,7 @@ public class Tree {
         }
         return parentNode;
     }
-    
+
     public void pre(Node node) {
         if (node != null) {
 //            System.out.println(node.getWord());

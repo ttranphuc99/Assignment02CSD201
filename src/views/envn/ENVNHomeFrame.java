@@ -5,7 +5,12 @@
  */
 package views.envn;
 
+import db.EnVnDictionary;
+import dictionary.Dictionary;
 import views.HomeFrame;
+
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,12 +18,15 @@ import views.HomeFrame;
  */
 public class ENVNHomeFrame extends javax.swing.JFrame {
 
+    private Dictionary dictionary;
+
     /**
      * Creates new form ENVNHomeFrame
      */
     public ENVNHomeFrame() {
         initComponents();
         this.setSize(500, 500);
+        dictionary = EnVnDictionary.dictionary;
     }
 
     /**
@@ -60,6 +68,11 @@ public class ENVNHomeFrame extends javax.swing.JFrame {
         txtSearch.setBounds(40, 102, 300, 30);
 
         btnTran.setText("Translate");
+        btnTran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTranActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnTran);
         btnTran.setBounds(360, 105, 100, 30);
 
@@ -95,6 +108,21 @@ public class ENVNHomeFrame extends javax.swing.JFrame {
         frame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTranActionPerformed
+        txtMean.setText("");
+        String word = txtSearch.getText().trim().toLowerCase();
+        LinkedList<String> result = dictionary.translate(word);
+        if (!result.isEmpty()) {
+            String mean = "";
+            for (String string : result) {
+                mean += string + "\n";
+            }
+            txtMean.setText(mean);
+        } else {
+            JOptionPane.showMessageDialog(this, "Not found this word in our dictionary");
+        }
+    }//GEN-LAST:event_btnTranActionPerformed
 
     /**
      * @param args the command line arguments

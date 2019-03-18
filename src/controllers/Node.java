@@ -5,7 +5,9 @@
  */
 package controllers;
 
+import java.text.Collator;
 import java.util.LinkedList;
+import java.util.Locale;
 
 /**
  *
@@ -76,6 +78,7 @@ public class Node {
     }
     
     public int compareTo(String word) {
-        return this.word.compareTo(word);
+        Collator myCo = Collator.getInstance(new Locale("vi"));
+        return myCo.compare(this.word, word);
     }
 }

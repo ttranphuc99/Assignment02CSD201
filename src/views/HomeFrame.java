@@ -5,6 +5,9 @@
  */
 package views;
 
+import db.EnVnDictionary;
+import db.VnEnDictionary;
+import dictionary.Dictionary;
 import views.envn.ENVNHomeFrame;
 import views.vnen.VNENHomeFrame;
 

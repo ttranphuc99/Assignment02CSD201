@@ -5,18 +5,25 @@
  */
 package views.vnen;
 
+import controllers.Tree;
+import db.EnVnDictionary;
+import db.VnEnDictionary;
+import dictionary.Dictionary;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Thien Phuc
  */
 public class AddNewFrame extends javax.swing.JFrame {
-
+    private Dictionary dictionary;
     /**
      * Creates new form AddNewFrame
      */
     public AddNewFrame() {
         initComponents();
         this.setSize(500, 500);
+        this.dictionary = VnEnDictionary.dictionary;
     }
 
     /**
@@ -41,10 +48,20 @@ public class AddNewFrame extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAdd);
         btnAdd.setBounds(90, 330, 130, 25);
 
         btnBack.setText("Trở về");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnBack);
         btnBack.setBounds(280, 330, 110, 25);
 
@@ -71,6 +88,29 @@ public class AddNewFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        if (txtWord.getText().trim().isEmpty() || txtMeaning.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không được để trống!");
+        } else {
+            String word = txtWord.getText().trim().toLowerCase();
+            String mean = txtMeaning.getText().trim().toLowerCase();
+            
+            dictionary.addWords(word, mean);
+            
+            Dictionary otherDic = EnVnDictionary.dictionary;
+            String[] meanList = mean.split(",");
+            for (String string : meanList) {
+                otherDic.addWords(string, word);
+            }
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        VNENHomeFrame frame = new VNENHomeFrame();
+        frame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments

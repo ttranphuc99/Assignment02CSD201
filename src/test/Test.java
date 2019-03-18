@@ -8,12 +8,15 @@ package test;
 import controllers.Node;
 import controllers.Tree;
 import dictionary.Dictionary;
+import java.text.Collator;
+import java.util.Locale;
 
 /**
  *
  * @author Thien Phuc
  */
 public class Test {
+
     public static void main(String[] args) {
 //        Tree tree = new Tree();
 //        Node node1 = new Node("a", null);
@@ -29,7 +32,9 @@ public class Test {
 //        tree.setRoot(tree.insert(tree.getRoot(), node5));
 //
 //        tree.pre(tree.getRoot());
-        Dictionary eng = new Dictionary(true);
-        eng.saveData();
+//        Dictionary eng = new Dictionary(true);
+//        eng.saveData();
+        Collator myCo = Collator.getInstance(new Locale("vi"));
+        System.out.println("a cmp a" + myCo.compare("a", "aw"));
     }
 }

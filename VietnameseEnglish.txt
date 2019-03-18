@@ -1,10 +1,11 @@
-﻿ai : who
+ai : who
 biết : know
 cổ xưa : ancient
 cùng : and
-đốt cháy : burn, be on fire, desire
 động vật : animal
+đốt cháy : burn, be on fire, desire
+kim cương : diamond
 trước : before, in front of, previously
-vũ khí : arms, weapons
-vàng : gold
 và : and
+vàng : gold
+vũ khí : arms, weapons

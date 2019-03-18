@@ -2,13 +2,14 @@ ancident : cổ xưa
 and : cùng, và
 animal : động vật
 arms : vũ khí
-be on fire : đốt cháy
 before : trước
+be on fire : đốt cháy
 burn : đốt cháy
 desire : đốt cháy
+diamond : kim cương
 gold : vàng
 in front of : trước
 know : biết
 previously : trước
 weapons : vũ khí
-﻿who : ai
+who : ai

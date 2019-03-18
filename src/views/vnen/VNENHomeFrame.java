@@ -5,6 +5,11 @@
  */
 package views.vnen;
 
+import controllers.Tree;
+import db.VnEnDictionary;
+import dictionary.Dictionary;
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
 import views.HomeFrame;
 
 /**
@@ -12,14 +17,17 @@ import views.HomeFrame;
  * @author Thien Phuc
  */
 public class VNENHomeFrame extends javax.swing.JFrame {
-
+    private Dictionary dictionary;
     /**
      * Creates new form VNENHomeFrame
      */
     public VNENHomeFrame() {
         initComponents();
         this.setSize(500, 500);
+        this.dictionary = VnEnDictionary.dictionary;
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,6 +68,11 @@ public class VNENHomeFrame extends javax.swing.JFrame {
         jLabel1.setBounds(140, 10, 220, 40);
 
         btnTran.setText("Dịch");
+        btnTran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTranActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnTran);
         btnTran.setBounds(360, 105, 100, 30);
 
@@ -95,6 +108,21 @@ public class VNENHomeFrame extends javax.swing.JFrame {
         frame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTranActionPerformed
+        txtMean.setText("");
+        String word = txtSearch.getText().trim().toLowerCase();
+        LinkedList<String> result = dictionary.translate(word);
+        if (!result.isEmpty()) {
+            String mean = "";
+            for (String string : result) {
+                mean += string + "\n";
+            }
+            txtMean.setText(mean);
+        } else {
+            JOptionPane.showMessageDialog(this, "Not found this word in our dictionary");
+        }
+    }//GEN-LAST:event_btnTranActionPerformed
 
     /**
      * @param args the command line arguments

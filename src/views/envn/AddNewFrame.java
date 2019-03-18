@@ -5,17 +5,25 @@
  */
 package views.envn;
 
+import controllers.Tree;
+import db.EnVnDictionary;
+import db.VnEnDictionary;
+import dictionary.Dictionary;
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Thien Phuc
  */
 public class AddNewFrame extends javax.swing.JFrame {
-
+    private Dictionary dictionary;
     /**
      * Creates new form AddNewFrame
      */
     public AddNewFrame() {
         initComponents();
+        this.dictionary = EnVnDictionary.dictionary;
     }
 
     /**
@@ -53,6 +61,11 @@ public class AddNewFrame extends javax.swing.JFrame {
         });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Author: Tran Thien Phuc - SE130139");
 
@@ -110,8 +123,27 @@ public class AddNewFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
+        if (txtWord.getText().trim().isEmpty() || txtMeaning.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Not allow null field!");
+        } else {
+            String word = txtWord.getText().trim().toLowerCase();
+            String mean = txtMeaning.getText().trim().toLowerCase();
+            
+            dictionary.addWords(word, mean);
+            
+            Dictionary otherDic = VnEnDictionary.dictionary;
+            String[] meanList = mean.split(",");
+            for (String string : meanList) {
+                otherDic.addWords(string, word);
+            }
+        }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        ENVNHomeFrame frame = new ENVNHomeFrame();
+        frame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
