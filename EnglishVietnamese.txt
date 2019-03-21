@@ -10,6 +10,8 @@ diamond : kim cương
 gold : vàng
 in front of : trước
 know : biết
+lie : nằm, xạo, xạo ke
+pre : trước
 previously : trước
 weapons : vũ khí
 who : ai

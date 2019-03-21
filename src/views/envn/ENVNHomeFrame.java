@@ -112,6 +112,11 @@ public class ENVNHomeFrame extends javax.swing.JFrame {
     private void btnTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTranActionPerformed
         txtMean.setText("");
         String word = txtSearch.getText().trim().toLowerCase();
+        String regex = "^[a-z ]+$";
+        if (!word.matches(regex)) {
+            JOptionPane.showMessageDialog(this, "Word can only contain letters");
+            return;
+        }
         LinkedList<String> result = dictionary.translate(word);
         if (!result.isEmpty()) {
             String mean = "";

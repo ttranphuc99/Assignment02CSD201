@@ -127,16 +127,33 @@ public class AddNewFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Not allow null field!");
         } else {
             String word = txtWord.getText().trim().toLowerCase();
+            String regex = "^[a-z ]+$"; 
+            if (!word.matches(regex)) {
+                JOptionPane.showMessageDialog(this, "Word can only contain letters");
+                return;
+            }
             String mean = txtMeaning.getText().trim().toLowerCase();
+            
+            regex = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ\" +\n"
+                    + "            \"ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ\" +\n"
+                    + "            \"ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\\\s]+[,a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ\" +\n"
+                    + "            \"ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ\" +\n"
+                    + "            \"ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\\\s]+$";
+            if (!mean.matches(regex)) {
+                JOptionPane.showMessageDialog(this, "Meanning can only contain letters");
+                return;
+            }
             
             dictionary.addWords(word, mean);
             
             Dictionary otherDic = VnEnDictionary.dictionary;
             String[] meanList = mean.split(",");
             for (String string : meanList) {
-                otherDic.addWords(string, word);
+                otherDic.addWords(string.trim(), word);
             }
+            JOptionPane.showMessageDialog(this, "Add successfully!");
         }
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

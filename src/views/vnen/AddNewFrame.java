@@ -16,7 +16,9 @@ import javax.swing.JOptionPane;
  * @author Thien Phuc
  */
 public class AddNewFrame extends javax.swing.JFrame {
+
     private Dictionary dictionary;
+
     /**
      * Creates new form AddNewFrame
      */
@@ -94,16 +96,30 @@ public class AddNewFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Không được để trống!");
         } else {
             String word = txtWord.getText().trim().toLowerCase();
+            String regex = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ\" +\n"
+                    + "            \"ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ\" +\n"
+                    + "            \"ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\\\s]+$";
+            if (!word.matches(regex)) {
+                JOptionPane.showMessageDialog(this, "Chữ không hợp lệ");
+                return;
+            }
             String mean = txtMeaning.getText().trim().toLowerCase();
-            
+            regex = "^[a-z ]+[,a-z ]+$";
+            if (!mean.matches(regex)) {
+                JOptionPane.showMessageDialog(this, "Ngữ nghĩa không hợp lệ");
+                return;
+            }
+
             dictionary.addWords(word, mean);
-            
+
             Dictionary otherDic = EnVnDictionary.dictionary;
             String[] meanList = mean.split(",");
             for (String string : meanList) {
-                otherDic.addWords(string, word);
+                otherDic.addWords(string.trim(), word);
             }
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
         }
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

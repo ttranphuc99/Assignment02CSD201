@@ -112,6 +112,13 @@ public class VNENHomeFrame extends javax.swing.JFrame {
     private void btnTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTranActionPerformed
         txtMean.setText("");
         String word = txtSearch.getText().trim().toLowerCase();
+        String regex = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ\" +\n"
+                + "            \"ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ\" +\n"
+                + "            \"ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\\\s]+$";
+        if (!word.matches(regex)) {
+            JOptionPane.showMessageDialog(this, "Chữ không hợp lệ");
+            return;
+        }
         LinkedList<String> result = dictionary.translate(word);
         if (!result.isEmpty()) {
             String mean = "";
