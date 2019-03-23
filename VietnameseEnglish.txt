@@ -1,11 +1,19 @@
 ai : who
+bảng : board
 biết : know
+cầu : bridge
+chó : dog
+chuột : mouse
 cổ xưa : ancient
 cùng : and
+đi : walk
+điện thoại : phone
 động vật : animal
 đốt cháy : burn, be on fire, desire
 kim cương : diamond
+mèo : cat
 nằm : lie
+nhỏ : min
 trước : before, in front of, previously, pre
 và : and
 vàng : gold

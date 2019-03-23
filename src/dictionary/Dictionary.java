@@ -151,7 +151,7 @@ public class Dictionary {
             LinkedList<String> meanList = node.getMeaningList();
             for (String string : meanComponent) {
                 string = string.trim().toLowerCase();
-                if (!meanList.contains(string)) {
+                if (!string.isEmpty() && !meanList.contains(string)) {
                     meanList.add(string);
                 }
             }
@@ -159,7 +159,9 @@ public class Dictionary {
             LinkedList<String> meanList = new LinkedList<>();
             for (String string : meanComponent) {
                 string = string.trim().toLowerCase();
-                meanList.add(string);
+                if (!string.isEmpty() && !meanList.contains(string)) {
+                    meanList.add(string);
+                }
             }
             Node newNode = new Node(word, meanList);
             tree.setRoot(tree.insert(tree.getRoot(), newNode));

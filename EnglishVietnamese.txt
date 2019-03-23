@@ -1,17 +1,26 @@
+ : cầu
 ancident : cổ xưa
 and : cùng, và
 animal : động vật
 arms : vũ khí
 before : trước
 be on fire : đốt cháy
+board : bảng
+bridge : cầu
 burn : đốt cháy
+cat : mèo
 desire : đốt cháy
 diamond : kim cương
+dog : chó
 gold : vàng
 in front of : trước
 know : biết
 lie : nằm, xạo, xạo ke
+min : nhỏ
+mouse : chuột
+phone : điện thoại
 pre : trước
 previously : trước
+walk : đi
 weapons : vũ khí
 who : ai
